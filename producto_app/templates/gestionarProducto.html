@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+{% load static %}
+<div class="row"> <!--La fila-->
+    
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!-- Columna Izquierda-->
+        <h1>Producto</h1>
+
+        <div class="card"> <!-- La tarjeta -->
+            <div class="card-body">
+                <form action="registrarProducto/" method="POST"> {% csrf_token %} <!-- Falta action -->
+                    <div class="form-group py-2">
+                        <input type="text" id="numidproducto" name="numidproducto" class="form-control" placeholder="Id Producto" minlength="1" maxlength="6" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre Producto" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txttipo" name="txttipo" class="form-control" placeholder="Tipo de producto" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtmaterial" name="txtmaterial" class="form-control" placeholder="Material" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="numpeso" name="numpeso" class="form-control" placeholder="Peso del Producto" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="numprecio" name="numprecio" class="form-control" placeholder="Precio" minlength="1" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txttamano" name="txttamano" class="form-control" placeholder="Tamaño del producto" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-dark">Guardar Producto</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- La tarjeta -->
+
+    </div> <!-- Columna Izquierda-->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"> <!-- Columna derecha -->
+        <h1>Listdo de Productos</h1>
+        <img class="w-50" src="{% static "img/producto.jpg" %}" alt="Mejia" width="100" height="">
+
+        <!-- La tabla -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id Producto</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Material</th>
+                    <th scope="col">Peso</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Tamaño</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in misproductos %}
+                    <tr>
+                        <td> {{m.id_producto}} </td>
+                        <td> {{m.nombre}} </td>
+                        <td> {{m.tipo}} </td>
+                        <td> {{m.material}} </td>
+                        <td> {{m.peso}} </td>
+                        <td> {{m.precio}} </td>
+                        <td> {{m.tamano}} </td>
+                        <td><a href="seleccionarProducto/{{m.id_producto}}" class="btn btn-secondary">Editar</a></td> <!-- Falta -->
+                        <td><a href="borrarProducto/{{m.id_producto}}" class="btn btn-dark">Borrar</a></td> 
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <!-- La tabla -->
+    </div> <!-- Columna derecha -->
+
+</div> <!--La fila-->
+{% endblock %}

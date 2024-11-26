@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+{% load static %}
+<div class="row"> <!--La fila-->
+    
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!-- Columna Izquierda-->
+        <h1>Proveedor</h1>
+
+        <div class="card"> <!-- La tarjeta -->
+            <div class="card-body">
+                <form action="registrarProveedor/" method="POST"> {% csrf_token %} <!-- Falta action -->
+                    <div class="form-group py-2">
+                        <input type="text" id="numidproveedor" name="numidproveedor" class="form-control" placeholder="Id Proveedor" minlength="1" maxlength="6" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre Proveedor" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtdireccion" name="txtdireccion" class="form-control" placeholder="Direccion Proveedor" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="numtelefono" name="numtelefono" class="form-control" placeholder="Telefono Proveedor" maxlength="10" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtcorreo" name="txtcorreo" class="form-control" placeholder="Correo Proveedor" maxlength="50" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtproducto" name="txtproducto" class="form-control" placeholder="Tipo de Producto" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtentrega" name="txtentrega" class="form-control" placeholder="Tipo de Entrega" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-dark">Guardar Proveedor</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- La tarjeta -->
+
+    </div> <!-- Columna Izquierda-->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"> <!-- Columna derecha -->
+        <h1>Listdo de Proveedores</h1>
+        <img class="w-50" src="{% static "img/proveedor.png" %}" alt="Mejia" width="400" height="">
+        <br>
+        <br>
+        <!-- La tabla -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id Proveedor</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Tipo de Producto</th>
+                    <th scope="col">Tipo de Entrega</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in misproveedores %}
+                    <tr>
+                        <td> {{m.id_proveedor}} </td>
+                        <td> {{m.nombre}} </td>
+                        <td> {{m.direccion}} </td>
+                        <td> {{m.telefono}} </td>
+                        <td> {{m.correo}} </td>
+                        <td> {{m.tipo_de_producto}} </td>
+                        <td> {{m.tipo_de_entrega}} </td>
+                        <td><a href="seleccionarProveedor/{{m.id_proveedor}}" class="btn btn-secondary">Editar</a></td> <!-- Falta -->
+                        <td><a href="borrarProveedor/{{m.id_proveedor}}" class="btn btn-dark">Borrar</a></td> 
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <!-- La tabla -->
+    </div> <!-- Columna derecha -->
+
+</div> <!--La fila-->
+{% endblock %}
