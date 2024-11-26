@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+    
+{% load static %}
+<div class="row"> <!--La fila-->
+    
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!-- Columna Izquierda-->
+        <h1>Cliente</h1>
+
+        <div class="card"> <!-- La tarjeta -->
+            <div class="card-body">
+                <form action="registrarCliente/" method="POST"> {% csrf_token %} <!-- Falta action -->
+                    <div class="form-group py-2">
+                        <input type="text" id="numidcliente" name="numidcliente" class="form-control" placeholder="Id Cliente" minlength="1" maxlength="6" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre Cliente" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtapellido" name="txtapellido" class="form-control" placeholder="Apellido Cliente" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtdireccion" name="txtdireccion" class="form-control" placeholder="Direccion Cliente" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="numtelefono" name="numtelefono" class="form-control" placeholder="Telefono Cliente" minlength="1" maxlength="10" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtcorreo" name="txtcorreo" class="form-control" placeholder="Correo de Cliente" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtmembresia" name="txtmembresia" class="form-control" placeholder="Membresia" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-dark">Guardar Cliente</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- La tarjeta -->
+
+    </div> <!-- Columna Izquierda-->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"> <!-- Columna derecha -->
+        <h1>Listdo de Clientes</h1>
+        <img class="w-50" src="{% static "img/cliente.jpg" %}" alt="Mejia" width="100" height="">
+        <!-- La tabla -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id Cliente</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Membresia</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in misclientes %}
+                    <tr>
+                        <td> {{m.id_cliente}} </td>
+                        <td> {{m.nombre}} </td>
+                        <td> {{m.apellidos}} </td>
+                        <td> {{m.direccion}} </td>
+                        <td> {{m.telefono}} </td>
+                        <td> {{m.correo}} </td>
+                        <td> {{m.membresia}} </td>
+                        <td><a href="seleccionarCliente/{{m.id_cliente}}" class="btn btn-secondary">Editar</a></td> <!-- Falta -->
+                        <td><a href="borrarCliente/{{m.id_cliente}}" class="btn btn-dark">Borrar</a></td> 
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <!-- La tabla -->
+    </div> <!-- Columna derecha -->
+
+</div> <!--La fila-->
+{% endblock %}
