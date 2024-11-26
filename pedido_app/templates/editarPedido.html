@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+ 
+<div class="row"> <!-- Fila en editar-->
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Pedido</h2>
+        <!-- Aquí codigo tarjeta -->
+
+        <div class="card"> <!-- La tarjeta -->
+            <div class="card-body">
+                <form action="/editarPedido/" method="POST"> {% csrf_token %} <!-- Falta action -->
+                    <div class="form-group py-2">
+                        <input type="text" id="numidpedido" name="numidpedido" class="form-control" value="{{mispedidos.id_pedido}}" minlength="1" maxlength="6" readonly required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtfecha" name="txtfecha" class="form-control" value="{{mispedidos.fecha}}" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtcliente" name="txtcliente" class="form-control" value="{{mispedidos.nombre_cliente}}" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtproducto" name="txtproducto" class="form-control" value="{{mispedidos.producto}}" minlength="1" maxlength="10" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtestado" name="txtestado" class="form-control" value="{{mispedidos.estado}}" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtcantidad" name="txtcantidad" class="form-control" value="{{mispedidos.cantidad_total}}" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtmetodoentrega" name="txtmetodoentrega" class="form-control" value="{{mispedidos.metodo_entrega}}" maxlength="30" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-dark">Guardar Pedido</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- La tarjeta -->
+
+        <!-- Aquí codigo tarjeta -->
+    </div> 
+</div> <!-- Fila en editar-->
+
+{% endblock %}

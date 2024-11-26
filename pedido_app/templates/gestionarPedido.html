@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+     
+{% load static %}
+<div class="row"> <!--La fila-->
+    
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4"> <!-- Columna Izquierda-->
+        <h1>Pedido</h1>
+
+        <div class="card"> <!-- La tarjeta -->
+            <div class="card-body">
+                <form action="registrarPedido/" method="POST"> {% csrf_token %} <!-- Falta action -->
+                    <div class="form-group py-2">
+                        <input type="text" id="numidpedido" name="numidpedido" class="form-control" placeholder="Id Pedido" minlength="1" maxlength="6" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtfecha" name="txtfecha" class="form-control" placeholder="Fecha Pedido" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtcliente" name="txtcliente" class="form-control" placeholder="Nombre Cliente" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtproducto" name="txtproducto" class="form-control" placeholder="Productos" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtestado" name="txtestado" class="form-control" placeholder="Estado" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtcantidad" name="txtcantidad" class="form-control" placeholder="Cantidad total" minlength="1" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <input type="text" id="txtmetodoentrega" name="txtmetodoentrega" class="form-control" placeholder="Metodo de entrega" maxlength="100" required>
+                    </div>
+
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-dark">Guardar Pedido</button>
+                    </div>
+                </form>
+            </div>
+        </div> <!-- La tarjeta -->
+
+    </div> <!-- Columna Izquierda-->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8"> <!-- Columna derecha -->
+        <h1>Listdo de Pedidos</h1>
+        <img class="w-50" src="{% static "img/pedido.png" %}" alt="Mejia" width="100" height="">
+        <!-- La tabla -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id Pedido</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Nombre Cliente</th>
+                    <th scope="col">Productos</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Cantidad total</th>
+                    <th scope="col">Metodo de entrega</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in mispedidos %}
+                    <tr>
+                        <td> {{m.id_pedido}} </td>
+                        <td> {{m.fecha}} </td>
+                        <td> {{m.nombre_cliente}} </td>
+                        <td> {{m.producto}} </td>
+                        <td> {{m.estado}} </td>
+                        <td> {{m.cantidad_total}} </td>
+                        <td> {{m.metodo_entrega}} </td>
+                        <td><a href="seleccionarPedido/{{m.id_pedido}}" class="btn btn-secondary">Editar</a></td> <!-- Falta -->
+                        <td><a href="borrarPedido/{{m.id_pedido}}" class="btn btn-dark">Borrar</a></td> 
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <!-- La tabla -->
+    </div> <!-- Columna derecha -->
+
+</div> <!--La fila-->
+{% endblock %}
